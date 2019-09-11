@@ -1,7 +1,7 @@
 <?php
 
 
-class Pen extends StationeryPrototype
+class Pen extends Stationery
 {
 
 }

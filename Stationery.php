@@ -1,7 +1,7 @@
 <?php
 
 
-class StationeryPrototype implements prototypeInterface
+class Stationery implements prototypeInterface
 {
 
     function cloning()
