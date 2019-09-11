@@ -6,6 +6,21 @@ class Stationery implements prototypeInterface
     var string $description;
     var string $owner;
     var DateTime $purchaseDate;
+
+    public function __construct($description, $owner, $purchaseDate)
+    {
+        $this->description = $description;
+        $this->owner = $owner;
+        $this->purchaseDate = $purchaseDate;
+    }
+
+    function __clone()
+    {
+        $this->description = "Copy of " . $this->description;
+        //The owner of the stationary remains the same. Therefore we leave the reference to the existing object
+        $this->purchaseDate = new DateTime;
+    }
+
     //getters
     public function getDescription() : string     { return $this->description;}
     public function getOwner() : string     { return $this->owner;}
@@ -16,10 +31,4 @@ class Stationery implements prototypeInterface
     public function setOwner($owner)    {$this->owner = $owner;}
     public function setPurchaseDate($purchaseDate)    {$this->purchaseDate = $purchaseDate;}
 
-    function __clone()
-    {
-        $this->description = "Copy of " . $this->description;
-        //The owner of the stationary remains the same. Therefore we leave the reference to the existing object
-        $this->purchaseDate = new DateTime;
-    }
 }
