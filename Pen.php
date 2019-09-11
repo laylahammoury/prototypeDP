@@ -8,6 +8,16 @@ class Pen extends Stationery
     var string $companyName;
     var bool $transparent ;
 
+    public function __construct($description, $owner, $purchaseDate, $color, $companyName, $transparent )
+    {
+        parent::__construct($description, $owner, $purchaseDate);
+        $this->color = $color;
+        $this->companyName = $companyName;
+        $this->transparent = $transparent;
+    }
+
+
+
     public function __clone()
     {
         parent::__clone();
