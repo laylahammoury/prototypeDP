@@ -3,5 +3,5 @@
 
 interface prototypeInterface
 {
-function cloning();
+function __clone();
 }
