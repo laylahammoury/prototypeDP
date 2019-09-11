@@ -1,11 +1,12 @@
 <?php
-
+include ("prototypeInterface.php");
 
 class Stationery implements prototypeInterface
 {
-    var string $description;
-    var string $owner;
-    var DateTime $purchaseDate;
+    //it's supposed that php7.4 supports the Scalar Type Declarations but it didn't work in the browser
+    var /*string*/ $description;
+    var /*string*/ $owner;
+    var /*DateTime*/ $purchaseDate;
 
     public function __construct($description, $owner, $purchaseDate)
     {
@@ -24,7 +25,8 @@ class Stationery implements prototypeInterface
     //getters
     public function getDescription() : string     { return $this->description;}
     public function getOwner() : string     { return $this->owner;}
-    public function getPurchaseDate() : string      { return $this->purchaseDate;}
+    public function getPurchaseDate()       {return $this ->purchaseDate;}
+
 
     //setters
     public function setDescription($description)    {$this->description = $description;}
