@@ -16,5 +16,15 @@ class Pen extends Stationery
         $this->transparent = $this->transparent;
     }
 
+    //getters
+    public function getColor(): string   {return $this->color;}
+    public function getCompanyName(): string    {return $this->companyName;}
+    public function isTransparent(): bool   {return $this->transparent;}
+
+    //setters
+    public function setColor(string $color): void   {$this->color = $color;}
+    public function setCompanyName(string $companyName): void   {$this->companyName = $companyName;}
+    public function setTransparent(bool $transparent): void {$this->transparent = $transparent;}
+
 
 }
