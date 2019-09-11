@@ -3,10 +3,10 @@
 
 class Pen extends Stationery
 {
-
-    var string $color;
-    var string $companyName;
-    var bool $transparent ;
+    //it's supposed that php7.4 supports the Scalar Type Declarations but it didn't work in the browser
+    var /*string*/ $color;
+    var /*string*/ $companyName;
+    var /*bool*/ $transparent ;
 
     public function __construct($description, $owner, $purchaseDate, $color, $companyName, $transparent )
     {
