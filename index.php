@@ -1,11 +1,29 @@
 
 <?php
+
+use function Sodium\add;
+
 include "Stationery.php";
 include "Pen.php";
+
+$pens = array();
+
 $redPen = new Pen("pointed pen 0.4", "Layla",
     new DateTime(),"red", "ADEL");
-
 $copyOfRedPen =  clone $redPen;
+
+array_push($pens, $redPen , $copyOfRedPen);
+if (isset ($_REQUEST['createPen']))
+{
+    $desc = $_REQUEST['desc'];
+    $owner = $_REQUEST['owner'];
+    $color = $_REQUEST['color'];
+    $company = $_REQUEST['company'];
+    $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
+    array_push($pens, $pen);
+
+}
+
 
 ?>
 <!--
@@ -73,6 +91,22 @@ $copyOfRedPen =  clone $redPen;
             </div>
             <div class="card-body ">
                 <h5 class="card-title">These are the pens you have</h5>
+                <?php
+
+               // echo sizeof($pens);
+               foreach ($pens as $pen ){
+                   echo "<div class=\"card border-info mb-3\" style=\"max-width: 18rem;\">
+          <div class=\"card-header\">$pen->companyName</div>
+          <div class=\"card-body text-info\">
+            <h5 class=\"card-title\">$pen->description</h5>
+           <p class=\"card-text\"> $pen->owner bought this  nice $pen->color pen  in '    '         </p>
+           <button type=\"submit\" class=\"btn btn-primary mb-2\" name=\"copyPen\">Get another one</button>
+          </div>
+        </div>";
+               }
+
+
+                ?>
 <!--                <a href="#" class="btn btn-primary">Add</a>-->
             </div>
         </div>
@@ -85,11 +119,12 @@ $copyOfRedPen =  clone $redPen;
                     <p class="card-text">In order to add the pen ypu have to your stationary enter the following information .</p>
                     <form action="">
 
-                        <input class="form-control" type="text" placeholder="Description"><br>
-                        <input class="form-control" type="text" placeholder="Your name"><br>
-                        <input class="form-control" type="text" placeholder="Color"><br>
-                        <input class="form-control" type="text" placeholder="Manufacturer company name"><br>
-                        <button type="submit" class="btn btn-primary mb-2">Add pen</button>
+                        <input class="form-control" type="text" placeholder="Description" name="desc"><br>
+                        <input class="form-control" type="text" placeholder="Your name" name="owner"><br>
+                        <input class="form-control" type="text" placeholder="Color" name="color"><br>
+                        <input class="form-control" type="text" placeholder="Manufacturer company name" name="company"><br>
+                        <button type="submit" class="btn btn-primary mb-2" name="createPen">Add pen</button>
+
                     </form>
 
                 </div>
