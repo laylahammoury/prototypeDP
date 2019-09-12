@@ -23,6 +23,12 @@ if (isset ($_REQUEST['createPen']))
     array_push($pens, $pen);
 
 }
+if(isset($_REQUEST['copyPen']))
+{
+    $copyOfPen =  clone $_REQUEST['pen'];
+    array_push($pens, $copyOfPen);
+
+}
 
 
 ?>
@@ -143,7 +149,7 @@ if (isset ($_REQUEST['createPen']))
                 <div class="col-md-7 mt-md-0 mt-3">
 
                     <!-- Content -->
-                    <h5 class="text-uppercase text-light">Stationary organizer</h5>
+                    <h5 class=" text-light">Stationary organizer</h5>
                     <p class="text-light"> In this organizer you can find manage your stationary easily</p>
 
                 </div>
@@ -153,7 +159,7 @@ if (isset ($_REQUEST['createPen']))
                 <div class="col-md-3 mb-md-0 mb-3">
 
                     <!-- Links -->
-                    <h5 class="text-uppercase text-light">Share</h5>
+                    <h5 class=" text-light">Share</h5>
 
                     <ul class="list-unstyled">
                         <li>
