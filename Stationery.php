@@ -17,7 +17,7 @@ class Stationery implements prototypeInterface
 
     function __clone()
     {
-        $this->description = "Copy of " . $this->description;
+        $this->description = "Another " . $this->description;
         //The owner of the stationary remains the same. Therefore we leave the reference to the existing object
         $this->purchaseDate = new DateTime;
     }
