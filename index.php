@@ -1,38 +1,54 @@
 <?php
+    session_start();
+
     include "Stationery.php";
     include "Pen.php";
 
     $pens = array();
-    $redPen = new Pen("pointed pen 0.4", "Layla", new DateTime(),"red", "ADEL");
-    $copyOfRedPen =  clone $redPen;
-    array_push($pens, $redPen , $copyOfRedPen);
+    //these 2 pens are used to show that the clone works well
+//    $redPen = new Pen("pointed pen 0.4", "Layla", new DateTime(),"red", "ADEL");
+//    $copyOfRedPen =  clone $redPen;
+    //array_push($pens, $redPen , $copyOfRedPen);
+
+    if(isset($_SESSION['pens'])) {
+                $result = array_merge( $_SESSION['pens'], $pens);
+                $_SESSION['pens'] = $result;
+        }else{
+            $_SESSION['pens'] = $pens;
+        }
 
     if (isset ($_REQUEST['createPen']))
     {
-        extract($_REQUEST);
+
         $desc = $_REQUEST['desc'];
         $owner = $_REQUEST['owner'];
         $color = $_REQUEST['color'];
         $company = $_REQUEST['company'];
         $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
         array_push($pens, $pen);
-//        echo "<pre>";
-//        print_r($pens);
+        $result = array_merge($_SESSION['pens'], $pens);
+        $_SESSION['pens'] = $result;
+
     }
 
 
     if(isset($_GET['copyingPen']))
     {
-       // echo "print the get ";
-
-       $desc = $_GET['desc'];
+        $desc = $_GET['desc'];
         $owner = $_GET['owner'];
         $color = $_GET['color'];
         $company = $_GET['company'];
         $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
         $temp = clone($pen);
         array_push($pens, $temp);
+        $result = array_merge($_SESSION['pens'], $pens);
+        $_SESSION['pens'] = $result;
     }
+
+    echo "<pre>";
+
+   print_r($_SESSION['pens']);
+
 ?>
 
 <!DOCTYPE html>
@@ -64,28 +80,39 @@
             <div class="card-body ">
                 <h5 class="card-title">These are the pens you have</h5>
                 <?php
-               foreach ($pens as $pen ){
-                   echo "<form action='' method='get'>
-                                <input type='hidden'  name='desc' value='$pen->description'>
-                                <input type='hidden'  name='owner' value='$pen->owner'>
-                                <input type='hidden' name='color' value='$pen->color'>
-                                <input type='hidden' name='company' value='$pen->companyName'>
 
-                                <div class=\"card border-info mb-3\" style=\"max-width: 18rem;\">
-                                    <div class=\"card-header\">$pen->companyName</div>
-                                    <div class=\"card-body text-info\">
-                                    <h5 class=\"card-title\">$pen->description</h5>
-                                    <p class=\"card-text\"> $pen->owner bought this  nice $pen->color pen. </p>";
-                                    echo "purchase date : ". $pen->getPurchaseDate()->format('Y-m-d');
-                                    echo " <button type=\"submit\" class=\"btn btn-primary mb-2 mt-4\" name='copyingPen'>Get another one</button>
+               // echo $_SESSION['pens'][0];
+//                $tempArr = array();
+//                $tempresult = array_merge( $_SESSION['pens'], $tempArr);
+//                    echo "<br>the temp result <is></is>";
+//                print_r($tempresult);
+//                foreach ($_SESSION['pens'][0] as $key => $value){
+//
+//                    echo "the value of key is ". $key. " the value is " .$value;
+//                }
+
+
+                   foreach ($pens as  $pen ){
+                       echo "<form action='' method='get'>
+                                    <input type='hidden'  name='desc' value='$pen->description'>
+                                    <input type='hidden'  name='owner' value='$pen->owner'>
+                                    <input type='hidden' name='color' value='$pen->color'>
+                                    <input type='hidden' name='company' value='$pen->companyName'>
+    
+                                    <div class=\"card border-info mb-3\" style=\"max-width: 18rem;\">
+                                        <div class=\"card-header\">$pen->companyName</div>
+                                        <div class=\"card-body text-info\">
+                                        <h5 class=\"card-title\">$pen->description</h5>
+                                        <p class=\"card-text\"> $pen->owner bought this  nice $pen->color pen. </p>";
+                                        echo "purchase date : ". $pen->getPurchaseDate()->format('Y-m-d');
+                                        echo " <button type=\"submit\" class=\"btn btn-primary mb-2 mt-4\" name='copyingPen'>Get another one</button>
+                                        </div>
                                     </div>
-                                </div>
-                        </form>";
-               }
+                            </form>";
+                   }
 
 
                 ?>
-<!--                <a href="#" class="btn btn-primary">Add</a>-->
             </div>
         </div>
             <div class="card col-md-5 float-right pt-2 bg-light">
