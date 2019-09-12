@@ -1,70 +1,43 @@
-
 <?php
 
+use Couchbase\RegexpSearchQuery;
 use function Sodium\add;
+    include "Stationery.php";
+    include "Pen.php";
 
-include "Stationery.php";
-include "Pen.php";
+    $pens = array();
+    $redPen = new Pen("pointed pen 0.4", "Layla", new DateTime(),"red", "ADEL");
+    $copyOfRedPen =  clone $redPen;
+    array_push($pens, $redPen , $copyOfRedPen);
 
-$pens = array();
-
-$redPen = new Pen("pointed pen 0.4", "Layla",
-    new DateTime(),"red", "ADEL");
-$copyOfRedPen =  clone $redPen;
-
-array_push($pens, $redPen , $copyOfRedPen);
-if (isset ($_REQUEST['createPen']))
-{
-    $desc = $_REQUEST['desc'];
-    $owner = $_REQUEST['owner'];
-    $color = $_REQUEST['color'];
-    $company = $_REQUEST['company'];
-    $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
-    array_push($pens, $pen);
-
-}
-if(isset($_REQUEST['copyPen']))
-{
-    $copyOfPen =  clone $_REQUEST['pen'];
-    array_push($pens, $copyOfPen);
-
-}
+    if (isset ($_REQUEST['createPen']))
+    {
+        extract($_REQUEST);
+        $desc = $_REQUEST['desc'];
+        $owner = $_REQUEST['owner'];
+        $color = $_REQUEST['color'];
+        $company = $_REQUEST['company'];
+        $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
+        array_push($pens, $pen);
+//        echo "<pre>";
+//        print_r($pens);
+    }
 
 
+    if(isset($_GET['copyingPen']))
+    {
+       // echo "print the get ";
+
+       $desc = $_GET['desc'];
+        $owner = $_GET['owner'];
+        $color = $_GET['color'];
+        $company = $_GET['company'];
+        $pen = new Pen($desc, $owner, new DateTime(), $color, $company );
+        $temp = clone($pen);
+        array_push($pens, $temp);
+    }
 ?>
-<!--
-<!DOCTYPE html>
-<html lang = "en-us">
 
-    <body>
-        <h1>header 1</h1>
-        <p><?php
-            echo "The company name is :" . $redPen->getCompanyName() ?></p>
-    <p>
-       <?php echo "the color is " . $redPen->getColor();?>
-       <?php echo "the owner is " . $redPen->getOwner();?>
-       <?php echo $redPen->getDescription();?>
-    </p> <p>
-       <?php
-       echo"purchase date is :". $redPen->getPurchaseDate()->format('Y-m-d');
-       ?>
-    </p>
-
-        <br><br><br>
-        <p><?php
-            echo "The company name is :" . $copyOfRedPen->getCompanyName() ?></p>
-    <p>
-       <?php echo "the color is " . $copyOfRedPen->getColor();
-        echo "the owner is " . $copyOfRedPen->getOwner();
-       echo  $copyOfRedPen->getDescription();?>
-
-    </p> <p>
-       <?php
-       echo"purchase date is :". $copyOfRedPen->getPurchaseDate()->format('Y-m-d');
-       ?>
-    </p>
-    </body>
--->
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -98,17 +71,23 @@ if(isset($_REQUEST['copyPen']))
             <div class="card-body ">
                 <h5 class="card-title">These are the pens you have</h5>
                 <?php
-
-               // echo sizeof($pens);
                foreach ($pens as $pen ){
-                   echo "<div class=\"card border-info mb-3\" style=\"max-width: 18rem;\">
-          <div class=\"card-header\">$pen->companyName</div>
-          <div class=\"card-body text-info\">
-            <h5 class=\"card-title\">$pen->description</h5>
-           <p class=\"card-text\"> $pen->owner bought this  nice $pen->color pen  in '    '         </p>
-           <button type=\"submit\" class=\"btn btn-primary mb-2\" name=\"copyPen\">Get another one</button>
-          </div>
-        </div>";
+                   echo "<form action='' method='get'>
+                                <input type='hidden'  name='desc' value='$pen->description'>
+                                <input type='hidden'  name='owner' value='$pen->owner'>
+                                <input type='hidden' name='color' value='$pen->color'>
+                                <input type='hidden' name='company' value='$pen->companyName'>
+
+                                <div class=\"card border-info mb-3\" style=\"max-width: 18rem;\">
+                                    <div class=\"card-header\">$pen->companyName</div>
+                                    <div class=\"card-body text-info\">
+                                    <h5 class=\"card-title\">$pen->description</h5>
+                                    <p class=\"card-text\"> $pen->owner bought this  nice $pen->color pen. </p>";
+                                    echo "purchase date : ". $pen->getPurchaseDate()->format('Y-m-d');
+                                    echo " <button type=\"submit\" class=\"btn btn-primary mb-2 mt-4\" name='copyingPen'>Get another one</button>
+                                    </div>
+                                </div>
+                        </form>";
                }
 
 
