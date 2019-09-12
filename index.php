@@ -1,8 +1,7 @@
 <?php
-    session_start();
-
     include "Stationery.php";
     include "Pen.php";
+    session_start();
 
     $pens = array();
     //these 2 pens are used to show that the clone works well
@@ -82,8 +81,8 @@
                 <?php
 
                // echo $_SESSION['pens'][0];
-//                $tempArr = array();
-//                $tempresult = array_merge( $_SESSION['pens'], $tempArr);
+                $tempArr = array();
+                $tempresult = array_merge( $_SESSION['pens'], $tempArr);
 //                    echo "<br>the temp result <is></is>";
 //                print_r($tempresult);
 //                foreach ($_SESSION['pens'][0] as $key => $value){
@@ -92,7 +91,7 @@
 //                }
 
 
-                   foreach ($pens as  $pen ){
+                   foreach ($tempresult as  $pen ){
                        echo "<form action='' method='get'>
                                     <input type='hidden'  name='desc' value='$pen->description'>
                                     <input type='hidden'  name='owner' value='$pen->owner'>
