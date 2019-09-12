@@ -8,7 +8,7 @@ class Pen extends Stationery
     var /*string*/ $companyName;
 
 
-    public function __construct($description, $owner, $purchaseDate, $color, $companyName, $transparent )
+    public function __construct($description, $owner, $purchaseDate, $color, $companyName)
     {
         parent::__construct($description, $owner, $purchaseDate);
         $this->color = $color;
