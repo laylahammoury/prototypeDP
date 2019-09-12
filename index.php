@@ -3,8 +3,8 @@
 include "Stationery.php";
 include "Pen.php";
 $redPen = new Pen("pointed pen 0.4", "Layla",
-    new DateTime(),"red", "ADEL",
-    false );
+    new DateTime(),"red", "ADEL");
+
 $copyOfRedPen =  clone $redPen;
 
 ?>
@@ -65,55 +65,76 @@ $copyOfRedPen =  clone $redPen;
         </nav>
 
 
+<div class="container  p-2">
+    <div class ="clearfix">
+        <div class="card col-md-5 float-left pt-2 bg-light">
+            <div class="card-header bg-primary text-light">
+                Your stationary
+            </div>
+            <div class="card-body ">
+                <h5 class="card-title">These are the pens you have</h5>
+<!--                <a href="#" class="btn btn-primary">Add</a>-->
+            </div>
+        </div>
+            <div class="card col-md-5 float-right pt-2 bg-light">
+                <div class="card-header bg-primary text-light">
+                    Add Pen
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Add a pen to stationary</h5>
+                    <p class="card-text">In order to add the pen ypu have to your stationary enter the following information .</p>
+                    <form action="">
+
+                        <input class="form-control" type="text" placeholder="Description"><br>
+                        <input class="form-control" type="text" placeholder="Your name"><br>
+                        <input class="form-control" type="text" placeholder="Color"><br>
+                        <input class="form-control" type="text" placeholder="Manufacturer company name"><br>
+                        <button type="submit" class="btn btn-primary mb-2">Add pen</button>
+                    </form>
+
+                </div>
+            </div>
+
+    </div>
     </body>
     <!-- Footer -->
     <footer class="page-footer font-small bg-dark pt-4">
 
-        <!-- Footer Links -->
         <div class="container-fluid text-center text-md-left">
 
             <!-- Grid row -->
             <div class="row">
-
                 <!-- Grid column -->
                 <div class="col-md-7 mt-md-0 mt-3">
 
                     <!-- Content -->
-                    <h5 class="text-uppercase text-light">Footer Content</h5>
-                    <p class="text-light"> Here you can use rows and columns to organize your footer content.</p>
+                    <h5 class="text-uppercase text-light">Stationary organizer</h5>
+                    <p class="text-light"> In this organizer you can find manage your stationary easily</p>
 
                 </div>
                 <!-- Grid column -->
-
-                <hr class="clearfix w-100 d-md-none pb-3">
 
                 <!-- Grid column -->
                 <div class="col-md-3 mb-md-0 mb-3">
 
                     <!-- Links -->
-                    <h5 class="text-uppercase text-light">Links</h5>
+                    <h5 class="text-uppercase text-light">Share</h5>
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!">Link 1</a>
+                            <a href="#!">facebook</a>
                         </li>
                         <li>
-                            <a href="#!">Link 2</a>
+                            <a href="#!">twitter</a>
                         </li>
                         <li>
-                            <a href="#!">Link 3</a>
+                            <a href="#!">pinterest</a>
                         </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
+
                     </ul>
 
                 </div>
                 <!-- Grid column -->
-
-
-            </div>
-            <!-- Grid column -->
         </div>
         <!-- Grid row -->
         </div>
