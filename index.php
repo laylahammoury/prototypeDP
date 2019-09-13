@@ -92,7 +92,7 @@ if(isset($_GET['copyingPen']))
             </div>
             <div class="card-body">
                 <h5 class="card-title">Add a pen to stationary</h5>
-                <p class="card-text">In order to add the pen ypu have to your stationary enter the following information .</p>
+                <p class="card-text">In order to add the pen you have got to your stationary enter the following information .</p>
                 <form action="">
                     <input class="form-control" type="text" placeholder="Description" name="desc">
                     <br>
